@@ -1,0 +1,59 @@
+.mainDiv {
+    width: 400px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    /* text-align: center; */
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flexDiv {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.labelDiv {
+    width: 100px;
+    align-self: center;
+}
+
+.inputBox {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: 25px;
+}
+
+.center {
+    text-align: center;
+}
+
+.hr {
+    width:300px;
+    margin-top: 20px;
+    border: 1px solid lightgray;
+}
+
+.light {
+    color: rgb(187, 186, 186);
+    margin-top: 20px;
+}
+
+.loginBtn {
+    background-color: rgb(93, 93, 243);
+    color:white;
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin:20px;
+}
+
+.registerBtn {
+    background-color: green;
+    color:white;
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin:20px;
+}
