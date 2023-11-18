@@ -50,6 +50,17 @@ connection.connect(function (err) {
                 }
 
             });
+            connection.query('select * from product', //['admin'],
+            function (err, result) {
+                if (err) {
+                    console.log('Error executing the query - ${err}')
+                }
+                else {
+                    console.log("Result: ", result);
+                    setProduct(result);
+                }
+
+            });
     }
 });
 
@@ -58,32 +69,32 @@ app.get('/', function (req, res, next) {
 });
 
 let output;
+let products;
 
 const setOutput = (rows) => {
     output = rows;
     console.log(output);
 }
 
-function getColour(username, roomCount) {
-    return new Promise((resolve, reject) => {
-        connection.query(
-            "select * from users where name = ?",
-            [username],
-            (err, result) => {
-                return err ? reject(err) : resolve(result);
-            }
-        );
-    });
+const setProduct = (rows) => {
+    products = rows;
+    console.log(products);
 }
+
 
 app.post('/', function (req, res, next) {
     console.log(req.body);
-    let username = req.body.username;
+    let username = req.body.email;
     let pass = req.body.password;
-    //console.log(output);
-    if(username == "admin" && pass == "admin123"){
-        //res.sendFile(path.join(__dirname, "views", "products.html"));
-        res.render('products', {output});
+    let auth = false;
+    console.log(output);
+    for(let obj of output){
+        if(obj.name == username && obj.password == pass){
+            auth = true;
+        }
+    }
+    if(auth){
+        res.render('products', {products});
     }else{
         res.sendFile(path.join(__dirname, "views", "login.html"));
     }
