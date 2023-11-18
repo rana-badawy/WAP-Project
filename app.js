@@ -77,7 +77,7 @@ function getColour(username, roomCount) {
 }
 
 app.post('/', function (req, res, next) {
-    //console.log(req.body);
+    console.log(req.body);
     let username = req.body.username;
     let pass = req.body.password;
     //console.log(output);

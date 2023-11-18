@@ -1,60 +1,32 @@
 <!DOCTYPE html>
-<html>
-<header>
-    <style>
-        body {
-            background: rgb(131, 58, 180);
-            background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
-        }
-
-        #container {
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            margin-top: 50px;
-        }
-
-        form {
-            gap: 10px;
-            width: 25%;
-            padding: 20px;
-            justify-content: center;
-            align-content: center;
-        }
-
-        input {
-            margin-top: 10px;
-            border-radius: 5px;
-            width: 100%;
-            height: 30px;
-            border: 1px solid orchid;
-        }
-
-        #button {
-            float: left;
-            background-color: #833ab4;
-            border: 1px solid #833ab4;
-            color: white;
-            height: 50px;
-        }
-        #button:hover{
-            background-color: #fd1d1d;
-            border: 1px solid #fd1d1d;
-            color: white;
-        }
-    </style>
-</header>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="../stylesheets/login.css" />
+</head>
 <body>
-    <div id="container">
-        <form action="/" method="post">
-            <h3>Sign In</h3>
-            <input type="text" name="username" placeholder="Username" required /><br>
-            <input type="password" name="password" placeholder="Password" required /><br>
-            <input type="submit" value="Login" id="button" />
-        </form>
+    <div>
+        <div class="mainDiv">
+            <form action="/" method="post">
+                <div class="flexDiv">
+                    <div class="labelDiv">Email</div>
+                    <input class="inputBox" name="email" id="email" />
+                </div>
+                <div class="flexDiv">
+                    <div class="labelDiv label2">Password</div>
+                    <input class="inputBox" name="password" id="password" />
+                </div>
+
+                <div class="center"><button class="center loginBtn" type="submit">Log In</button></div>
+                <div class="center"><input type="checkbox" name="terms" value="terms" />Agree to terms and conditions <a href="">link</a></div>
+            </form>
+            <hr class="hr">
+            <div class="center light">Don't have an account?</div>
+            <div class="center"><button class="registerBtn">Create account</button></div>
+        </div>
     </div>
-
 </body>
-
 </html>
