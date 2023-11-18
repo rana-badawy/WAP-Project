@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <style>
+        body {
+            background: rgb(131, 58, 180);
+            background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            margin-top: 50px;
+        }
+
+        form {
+            gap: 10px;
+            width: 25%;
+            padding: 20px;
+            justify-content: center;
+            align-content: center;
+        }
+
+        input {
+            margin-top: 10px;
+            border-radius: 5px;
+            width: 100%;
+            height: 30px;
+            border: 1px solid orchid;
+        }
+
+        #button {
+            float: left;
+            background-color: #833ab4;
+            border: 1px solid #833ab4;
+            color: white;
+            height: 50px;
+        }
+        #button:hover{
+            background-color: #fd1d1d;
+            border: 1px solid #fd1d1d;
+            color: white;
+        }
+    </style>
+</header>
+
+<body>
+    <div id="container">
+        <form action="/" method="post">
+            <h3>Sign In</h3>
+            <input type="text" name="username" placeholder="Username" required /><br>
+            <input type="password" name="password" placeholder="Password" required /><br>
+            <input type="submit" value="Login" id="button" />
+        </form>
+    </div>
+
+</body>
+
+</html>
