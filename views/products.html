@@ -19,7 +19,7 @@
             justify-content: space-between;
             padding: 0px 70px;
             height: 64px;
-            background: #05357E;
+            background: black;
         }
 
         .nav-bar-top-left {
@@ -31,18 +31,17 @@
             display: flex;
             position: relative;
             gap: 20px;
-            color: #616E82;
             font-family: Helvetica Neue, Arial, Noto Sans, sans-serif;
             font-size: 13px;
             justify-content: center;
             align-items: center;
+            color: white;
         }
 
         .nav-bar-top-bottom {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            color: #616E82;
             font-family: Helvetica Neue, Arial, Noto Sans, sans-serif;
             font-size: 13px;
             gap: 3px;
@@ -56,73 +55,133 @@
 
         #left-bar {
             border: 1px solid black;
+            padding: 10px;
+            overflow-y: scroll;
         }
 
         #mid-bar {
             border: 1px solid red;
         }
-        #product{
+
+        #product {
             border: 1px solid black;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap:10px;
+            gap: 10px;
         }
-        #item{
+
+        #item {
             padding: 10px;
+        }
+
+        #view {
+            height: 30px;
+            display: flex;            
+            justify-content: flex-end;
+            align-content: flex-end;
+            padding: 10px 10px 0 0;
+            gap: 20px;
+        }
+        .nav-icon{
+            display: flex;
+            gap:20px;
+            color: yellow;
+            background-color: #1a1a1a;
+            padding: 10px;
+            font-size: 12px;
+            font-family: Helvetica Neue, Arial, Noto Sans, sans-serif;
         }
     </style>
 </header>
 
 <body>
     <div class="nav-bar">
+        <div class="nav-icon">
+            <div>
+                <label>BUY NOW, PAY LATER WITH AFTERPAY & KLARNA</label>
+            </div>
+            <div>
+                <label>FREE STANDARD SHIPPING ON ORDERS OVER $50</label>
+            </div>
+            <div>
+                <label>SHOP NEW ARRIVALS</label>
+            </div>
+        </div>
         <div class="nav-bar-top">
             <div class="nav-bar-top-left">
-                <a href="https://golomtbank.com/en"><img src="logo1.png" width="174px;" height="60px;"
-                        object-fit="cover;" /></a>
             </div>
             <div class="nav-bar-top-mid">
                 <label>WOMEN</label>
                 <label>MEN</label>
                 <label>KIDS</label>
                 <label>FOR ALL</label>
+                <label>ACCESSORIES</label>
+                <label>GIFT</label>
+                <label>SALE</label>
             </div>
             <div style="width: 300px;">
             </div>
             <div class="nav-bar-top-bottom">
                 <img src="call.png" width="15px;" height="15px;" />
-                <input type="search" name="search" placeholder="What can we help you find?"/>
+                <input type="search" name="search" placeholder="What can we help you find?" />
                 <label>|</label>
-                <img src="search.png" width="16px;" height="16px;" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL06rMWl5HepL7A146Qcko9iTPwm22jk0DLQ&usqp=CAU" width="16px;" height="16px;" />
                 <label>|</label>
-                <img src="flag.jpg" width="16px;" height="16px;" />
+                <img src="data:image/png;base64,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" width="16px;" height="16px;" />
             </div>
         </div>
+
     </div>
     <div id="layout">
         <div id="left-bar">
             <div><label>174 ITEMS | FILTER BY</label></div>
-            <div>
-                <div>SIZE</div>
-                <div>PRICE</div>
+            <div>SIZE
+                <hr>
+                <div>WOMEN SIZE<br>
+                    <input type="checkbox" />5<br>
+                    <input type="checkbox" />6<br>
+                    <input type="checkbox" />7<br>
+                    <input type="checkbox" />8<br>
+                    <input type="checkbox" />9<br>
+                    <input type="checkbox" />10<br>
+                    <input type="checkbox" />11<br>
+                    <input type="checkbox" />12
+                </div>
+                <div>MEN SIZE<br>
+                    <input type="checkbox" />6<br>
+                    <input type="checkbox" />7<br>
+                    <input type="checkbox" />8<br>
+                    <input type="checkbox" />9<br>
+                    <input type="checkbox" />10<br>
+                    <input type="checkbox" />11<br>
+                    <input type="checkbox" />12<br>
+                    <input type="checkbox" />13<br>
+                    <input type="checkbox" />14
+                </div>
             </div>
         </div>
         <div id="mid-bar">
-            <div>VIEW:</div>
-            <div id = "product">
+            <div id="view">
+                <div><b>VIEW:</b>PRODUCT</div>
+                <div>SORT BY:RECOMMENDED</div>
+        </div>
+            <div id="product">
                 <% for(let product of products) { %>
-                    <div id = "item">
-                        <img src="<%= product.img %>" width="100%;" height="250px;" style="object-fit: cover;"/><br>
+                    <div id="item">
+                        <img src="<%= product.img %>" width="100%;" height="250px;" style="object-fit: cover;" /><br>
                         <label>
                             <%= product.name %>
                         </label><br>
-                        <label>$
-                            <%= product.price %>
+                        <label>$<%= product.price %>
                         </label>
                     </div>
                     <% } %>
             </div>
 
         </div>
+    </div>
+    <div>
+        <footer>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta sequi modi quod. Mollitia architecto aliquid eligendi saepe ab facilis suscipit reiciendis ratione nisi quaerat quis nostrum corrupti possimus, dolorum totam.</footer>
     </div>
 
 </body>
