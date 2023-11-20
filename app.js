@@ -22,7 +22,7 @@ app.engine('html', ejs.renderFile);
 app.use('/stylesheets', express.static(path.join(__dirname, "stylesheets")));
 
 app.get('/', function (req, res, next) {
-    res.cookie('email', '');
+    res.cookie('user', '');
     res.sendFile(path.join(__dirname, "views", "login.html"));
 });
 

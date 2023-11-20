@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
-<header>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
-    <link rel="stylesheet" type="text/css" href="../stylesheets/cart.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</header>
-
+    <link rel="stylesheet" type="text/css" href="../stylesheets/order.css" />
+</head>
 <body>
     <div class="nav-bar">
         <div class="nav-icon">
@@ -46,29 +47,10 @@
         </div>
     </div>
 
-    <div class="mainContainer">
-        <div class="itemsContainer">
-            <% for(let item of items) { %>
-                <div class="itemContainer">
-                    <div class="itemDiv">
-                        <img class="itemImage" src="<%= item.img %>" />
-                        <div>
-                            <div class="nameDiv"><%= item.product_name %></div>
-                            <div class="quantityDiv">
-                                <button class="normalBtn"><i class="fa fa-arrow-up"></i></button>
-                                <label class="quantityLabel"><%= item.quantity %></label>
-                                <button class="normalBtn"><i class="fa fa-arrow-down"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="priceDiv">$<%= parseInt(item.price)*parseInt(item.quantity) %></div>
-                </div>
-            <% } %>
-        </div>
-
-        <div class="totalDiv">
-            <div>Total $200</div>
-            <div class="centerBtn"><a class="checkoutButton" href="/checkout">Checkout</a></div>
+    <div>
+        <div class="orderContainer">
+            <div class="orderDiv">Order has been created successfully</div>
+            <div class="centerBtn"><a class="normalBtn" href="/products">Continue Shopping</a></div>
         </div>
     </div>
 
@@ -120,7 +102,5 @@
             </div>
         </footer>
     </div>
-
 </body>
-
 </html>

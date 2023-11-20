@@ -4,7 +4,7 @@ const handler = require('../services/user_handler')
 
 const router = express.Router();
 
-router.post('/login', handler.login);
+router.post('/login', handler.getUsersMiddleware, handler.login);
 router.get('/invalid', handler.loginError);
 router.get('/register', handler.register);
 router.post('/addAccount', handler.addAccount);

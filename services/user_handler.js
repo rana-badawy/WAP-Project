@@ -3,18 +3,30 @@ const connection = require('./db_config');
 
 let users = [];
 
-connection.query('select * from users',
-    function (err, result) {
-        if (err) {
-            console.log('Error executing the query - ${err}')
-        }
-        else {
-            users = JSON.parse(JSON.stringify(result));
-        }
-});
+async function getUsersAsync() {
+    return new Promise((resolve) => {
+        connection.query('select * from users',
+            function (err, result) {
+                if (err) {
+                    console.log('Error executing the query - ${err}')
+                }
+                else {
+                    resolve(JSON.parse(JSON.stringify(result)));
+                }
+            }
+        )
+    });
+}
+
+function getUsersMiddleware(req, res, next){
+    getUsersAsync().then((val) => {
+        users = val;
+        next();
+    });
+}
 
 function verify(req, res, next) {
-    if (req.cookies.email) {
+    if (req.cookies.user) {
         next();
     }
     else {
@@ -23,23 +35,19 @@ function verify(req, res, next) {
 }
 
 function authenticate(email, password) {
-    let isFound = false;
-
     for (let user of users) {
         if (user.email == email && user.user_password == password) {
-            isFound = true;
-            return user.email;
+            return user.user_id;
         }
     }
 
     return '';
 }
 
-function login(req, res, next) {
-    console.log(req.body.email, req.body.password);
+function login(req, res, next) {    
     let user = authenticate(req.body.email, req.body.password);
 
-    res.cookie('email', user);
+    res.cookie('user', user);
     
     if (!user) {
         res.redirect('/invalid');
@@ -69,16 +77,17 @@ function addAccount(req, res, next) {
     fname + "', '" + lname + "', '" + email + "', '" + password + "')";
 
     connection.query(query,
-    function (err, result) {
-        if (err) {
-            console.log('Error executing the query - ${err}');
-            res.redirect('/register');
+        function (err, result) {
+            if (err) {
+                console.log('Error executing the query - ${err}');
+                res.redirect('/register');
+            }
+            else {
+                res.cookie('user', result.insertId);
+                res.redirect('/products');
+            }
         }
-        else {
-            console.log('Successfully added user');
-            res.redirect('/products');
-        }
-});
+    );
 }
 
-module.exports = {login, loginError, register, addAccount, verify}
+module.exports = {login, loginError, register, addAccount, verify, getUsersMiddleware}
