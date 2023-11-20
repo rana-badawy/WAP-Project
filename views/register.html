@@ -10,22 +10,22 @@
 <body>
     <div>
         <div class="mainDiv">
-            <form action="/register" method="post">
+            <form action="/addAccount" method="post">
                 <div class="flexDiv">
                     <div class="labelDiv">First Name</div>
-                    <input class="inputBox" name="fname" id="fname" />
+                    <input class="inputBox" name="fname" id="fname" required />
                 </div>
                 <div class="flexDiv">
                     <div class="labelDiv">Last Name</div>
-                    <input class="inputBox" name="lname" id="lname" />
+                    <input class="inputBox" name="lname" id="lname" required />
                 </div>
                 <div class="flexDiv">
                     <div class="labelDiv">Email</div>
-                    <input class="inputBox" name="email" id="email" />
+                    <input class="inputBox" name="email" id="email" required />
                 </div>
                 <div class="flexDiv">
                     <div class="labelDiv">Password</div>
-                    <input class="inputBox" name="password" id="password" />
+                    <input class="inputBox" name="password" id="password" type="password" required />
                 </div>
                 <div class="center"><button class="registerBtn" type="submit">Create account</button></div>
             </form>
