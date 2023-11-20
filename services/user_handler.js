@@ -1,8 +1,17 @@
 const path = require('path');
+const connection = require('./db_config');
 
-users = [{fname: 'Rana', lname: 'Badawy', email: 'rb@gmail.com', password: '123'},
-        {fname: 'M', lname: 'M', email: 'mm@gmail.com', password: '123'},
-        {fname: 'S', lname: 'S', email: 'ss@gmail.com', password: '123'}];
+let users = [];
+
+connection.query('select * from users',
+    function (err, result) {
+        if (err) {
+            console.log('Error executing the query - ${err}')
+        }
+        else {
+            users = JSON.parse(JSON.stringify(result));
+        }
+});
 
 function verify(req, res, next) {
     if (req.cookies.email) {
@@ -17,7 +26,7 @@ function authenticate(email, password) {
     let isFound = false;
 
     for (let user of users) {
-        if (user.email == email && user.password == password) {
+        if (user.email == email && user.user_password == password) {
             isFound = true;
             return user.email;
         }
@@ -54,7 +63,22 @@ function addAccount(req, res, next) {
     let email = req.body.email;
     let password = req.body.password;
 
-    res.redirect('/products');
+    console.log()
+
+    let query = "INSERT INTO users (fname, lname, email, user_password) VALUES ('" +
+    fname + "', '" + lname + "', '" + email + "', '" + password + "')";
+
+    connection.query(query,
+    function (err, result) {
+        if (err) {
+            console.log('Error executing the query - ${err}');
+            res.redirect('/register');
+        }
+        else {
+            console.log('Successfully added user');
+            res.redirect('/products');
+        }
+});
 }
 
 module.exports = {login, loginError, register, addAccount, verify}
