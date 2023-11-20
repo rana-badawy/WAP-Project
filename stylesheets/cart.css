@@ -5,6 +5,8 @@
 
 .mainContainer {
     display: flex;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 .itemsContainer {
@@ -32,13 +34,17 @@
     font-size: x-large;
 }
 
+.centerBtn {
+    margin-top:20px;
+}
+
 .checkoutButton {
     background-color: rgb(236, 213, 41);
-    color:white;
+    color: white;
     border: 0px;
     border-radius: 5px;
     padding: 5px 20px;
-    margin:20px;
+    text-decoration-line: none;
 }
 
 .itemDiv {

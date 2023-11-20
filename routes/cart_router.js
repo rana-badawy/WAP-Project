@@ -1,9 +1,10 @@
 const express = require('express');
-const path = require('path');
-const handler = require('../services/cart_handler')
+const user_handler = require('../services/user_handler')
+const cart_handler = require('../services/cart_handler')
 
 const router = express.Router();
 
-router.get('/cart', handler.getCart);
+router.get('/cart', user_handler.verify, cart_handler.getCartMiddleware, cart_handler.cart);
+router.get('/checkout', cart_handler.checkout);
 
 module.exports = router;
