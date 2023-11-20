@@ -2,7 +2,6 @@ const express = require("express");
 const ejs = require("ejs");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const mysql = require('mysql');
 
 const userRouter = require('./routes/user_router');
 const cartRouter = require('./routes/cart_router');
@@ -72,19 +71,6 @@ app.get('/', function (req, res, next) {
     res.cookie('email', '');
     res.sendFile(path.join(__dirname, "views", "login.html"));
 });
-
-let output;
-let products;
-
-const setOutput = (rows) => {
-    output = rows;
-    console.log(output);
-}
-
-const setProduct = (rows) => {
-    products = rows;
-    console.log(products);
-}
 
 app.use(userRouter);
 app.use(cartRouter);
