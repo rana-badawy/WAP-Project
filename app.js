@@ -23,8 +23,12 @@ app.engine('html', ejs.renderFile);
 app.use('/stylesheets', express.static(path.join(__dirname, "stylesheets")));
 
 app.get('/', function (req, res, next) {
-    res.cookie('user', '');
-    res.sendFile(path.join(__dirname, "views", "login.html"));
+    if ((!req.cookies.user) || req.cookies.user == '') {
+        res.cookie('user', '');
+        res.sendFile(path.join(__dirname, "views", "login.html"));
+    } else {
+        res.redirect('/products');
+    }
 });
 
 app.use(userRouter);

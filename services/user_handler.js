@@ -57,6 +57,11 @@ function login(req, res, next) {
     }
 }
 
+function logout(req, res, next) {
+    res.cookie('user', '');
+    res.redirect('/');
+}
+
 function loginError(req, res, next) {
     res.sendFile(path.join(__dirname, "../views", "login_error.html"));
 }
@@ -90,4 +95,4 @@ function addAccount(req, res, next) {
     );
 }
 
-module.exports = {login, loginError, register, addAccount, verify, getUsersMiddleware}
+module.exports = {login, loginError, register, addAccount, verify, getUsersMiddleware, logout}
