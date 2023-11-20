@@ -8,10 +8,6 @@
     padding: 10px;
     overflow-y: scroll;
 }
-
-#mid-bar {
-}
-
 #product {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -29,4 +25,13 @@
     align-content: flex-end;
     padding: 10px 10px 0 0;
     gap: 20px;
+}
+button{
+    width: 100%;
+    background-color: yellow;
+    border-color: yellow;
+    height: 30px;
+    font-size: 15px;
+    border-radius: 5px;
+    font-weight: 600;
 }

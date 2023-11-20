@@ -4,7 +4,6 @@ body {
 
 .nav-bar {
     position: sticky;
-    width: 100%;
     top: 0px;
     left: 0px;
     z-index: 1;
@@ -57,7 +56,6 @@ body {
 }
 
 footer{
-    width: 100%;
     display: flex;
     justify-content: space-evenly;
     gap: 10px;

@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 
 const userRouter = require('./routes/user_router');
 const cartRouter = require('./routes/cart_router');
+const productRouter = require('./routes/products_router');
 
 const app = express();
 
@@ -28,22 +29,4 @@ app.get('/', function (req, res, next) {
 
 app.use(userRouter);
 app.use(cartRouter);
-
-
-// app.post('/', function (req, res, next) {
-//     console.log(req.body);
-//     let username = req.body.email;
-//     let pass = req.body.password;
-//     let auth = false;
-//     console.log(output);
-//     for(let obj of output){
-//         if(obj.name == username && obj.password == pass){
-//             auth = true;
-//         }
-//     }
-//     if(auth){
-//         res.render('products', {products});
-//     }else{
-//         res.sendFile(path.join(__dirname, "views", "login.html"));
-//     }
-// });
+app.use(productRouter);
