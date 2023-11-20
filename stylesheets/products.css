@@ -8,10 +8,6 @@
     padding: 10px;
     overflow-y: scroll;
 }
-
-#mid-bar {
-}
-
 #product {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
