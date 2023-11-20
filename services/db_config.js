@@ -26,38 +26,3 @@ connection.connect(function (err) {
 });
 
 module.exports = connection;
-
-// let output;
-// let products;
-
-// connection.query('select * from users', //['admin'],
-//     function (err, result) {
-//         if (err) {
-//             console.log('Error executing the query - ${err}')
-//         }
-//         else {
-//             console.log("Result: ", result);
-//             setOutput(result);
-//         }
-// });
-
-// connection.query('select * from product', //['admin'],
-//     function (err, result) {
-//         if (err) {
-//             console.log('Error executing the query - ${err}')
-//         }
-//         else {
-//             console.log("Result: ", result);
-//             setProduct(result);
-//         }
-// });
-
-// const setOutput = (rows) => {
-//     output = rows;
-//     console.log(output);
-// }
-
-// const setProduct = (rows) => {
-//     products = rows;
-//     console.log(products);
-// }
