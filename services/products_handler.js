@@ -5,7 +5,7 @@ let products;
 
 const setProduct = (rows) => {
     products = rows;
-    console.log(products);
+    //console.log(products);
 }
 
 connection.query('select * from product', //['admin'],

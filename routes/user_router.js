@@ -8,9 +8,10 @@ router.post('/login', handler.getUsersMiddleware, handler.login);
 router.get('/invalid', handler.loginError);
 router.get('/register', handler.register);
 router.post('/addAccount', handler.addAccount);
+router.get('/logout', handler.logout);
 
-router.get('/products', function(req, res, next) {
-    res.sendFile(path.join(__dirname, "../views", "products.html"));
-});
+router.get('/products', handler.verify, function(req, res, next) {
+    res.sendFile(path.join(__dirname, '../views', 'products.html'));
+})
 
 module.exports = router;
