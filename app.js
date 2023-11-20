@@ -4,6 +4,9 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const mysql = require('mysql');
 
+const userRouter = require('./routes/user_router');
+const cartRouter = require('./routes/cart_router');
+
 const app = express();
 
 app.listen(80, function () {
@@ -32,39 +35,41 @@ const connection = mysql.createConnection({
 // Connecting to database admin123
 //ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 //flush privileges;
-connection.connect(function (err) {
-    if (err) {
-        console.log("Error in the connection")
-        console.log(err)
-    }
-    else {
-        console.log('Database Connected');
-        connection.query('select * from users', //['admin'],
-            function (err, result) {
-                if (err) {
-                    console.log('Error executing the query - ${err}')
-                }
-                else {
-                    console.log("Result: ", result);
-                    setOutput(result);
-                }
 
-            });
-            connection.query('select * from product', //['admin'],
-            function (err, result) {
-                if (err) {
-                    console.log('Error executing the query - ${err}')
-                }
-                else {
-                    console.log("Result: ", result);
-                    setProduct(result);
-                }
+// connection.connect(function (err) {
+//     if (err) {
+//         console.log("Error in the connection")
+//         console.log(err)
+//     }
+//     else {
+//         console.log('Database Connected');
+//         connection.query('select * from users', //['admin'],
+//             function (err, result) {
+//                 if (err) {
+//                     console.log('Error executing the query - ${err}')
+//                 }
+//                 else {
+//                     console.log("Result: ", result);
+//                     setOutput(result);
+//                 }
 
-            });
-    }
-});
+//             });
+//             connection.query('select * from product', //['admin'],
+//             function (err, result) {
+//                 if (err) {
+//                     console.log('Error executing the query - ${err}')
+//                 }
+//                 else {
+//                     console.log("Result: ", result);
+//                     setProduct(result);
+//                 }
+
+//             });
+//     }
+// });
 
 app.get('/', function (req, res, next) {
+    res.cookie('email', '');
     res.sendFile(path.join(__dirname, "views", "login.html"));
 });
 
@@ -81,21 +86,24 @@ const setProduct = (rows) => {
     console.log(products);
 }
 
+app.use(userRouter);
+app.use(cartRouter);
 
-app.post('/', function (req, res, next) {
-    console.log(req.body);
-    let username = req.body.email;
-    let pass = req.body.password;
-    let auth = false;
-    console.log(output);
-    for(let obj of output){
-        if(obj.name == username && obj.password == pass){
-            auth = true;
-        }
-    }
-    if(auth){
-        res.render('products', {products});
-    }else{
-        res.sendFile(path.join(__dirname, "views", "login.html"));
-    }
-});
+
+// app.post('/', function (req, res, next) {
+//     console.log(req.body);
+//     let username = req.body.email;
+//     let pass = req.body.password;
+//     let auth = false;
+//     console.log(output);
+//     for(let obj of output){
+//         if(obj.name == username && obj.password == pass){
+//             auth = true;
+//         }
+//     }
+//     if(auth){
+//         res.render('products', {products});
+//     }else{
+//         res.sendFile(path.join(__dirname, "views", "login.html"));
+//     }
+// });
