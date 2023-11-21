@@ -3,6 +3,7 @@ const path = require('path');
 const connection = require('./db_config');
 
 let cartItems = [];
+let total = 0;
 
 async function getCartAsync(user_id) {
     let query = "select temp.cart_id, temp.item_id, " +
@@ -27,13 +28,18 @@ async function getCartAsync(user_id) {
 function getCartMiddleware(req, res, next){
     getCartAsync(req.cookies.user).then((val) => {
         cartItems = val;
+        total = 0;
+        for (let item of cartItems) {
+            total += item.price*item.quantity;
+        }
+
         next();
     });
 }
 
 
 function cart(req, res, next) {
-    res.render('cart', {items: cartItems});
+    res.render('cart', {items: cartItems, total: total});
 }
 
 function checkout(req, res, next) {
@@ -60,6 +66,69 @@ function addQuantity(req, res, next) {
             }
         );
     }
+
+    getCartMiddleware(req, res, next);
+
+    res.send({items: cartItems});
 }
 
-module.exports = {cart, getCartMiddleware, checkout, addQuantity};
+function removeQuantity(req, res, next) {
+    let item_id = req.params.id;
+    let item = cartItems.filter((i) => i.item_id == item_id)[0];
+
+    if (item.quantity > 1) {
+        item.quantity--;
+
+        let query = "update item set quantity = quantity-1 where item_id = " + item_id;
+
+        connection.query(query,
+            function (err, result) {
+                if (err) {
+                    console.log('Error executing the query - ${err}');
+                }
+                else {
+                    console.log('item updated successfully');
+                }
+            }
+        );
+    }
+
+    else {
+        let query = "delete from item where item_id = " + item_id;
+
+        connection.query(query,
+            function (err, result) {
+                if (err) {
+                    console.log('Error executing the query - ${err}');
+                }
+                else {
+                    console.log('item updated successfully');
+                }
+            }
+        );
+    }
+
+    getCartMiddleware(req, res, next);
+
+    res.send({items: cartItems});
+}
+
+function deleteItem(req, res, next) {
+    let item_id = req.params.id;
+    let query = "delete from item where item_id = " + item_id;
+
+    connection.query(query,
+        function (err, result) {
+            if (err) {
+                console.log('Error executing the query - ${err}');
+            }
+            else {
+                console.log('item deleted successfully');
+            }
+        }
+    );
+
+    res.redirect('/cart');
+}
+
+module.exports = {cart, getCartMiddleware, checkout, addQuantity, removeQuantity, deleteItem};
