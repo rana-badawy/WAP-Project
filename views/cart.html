@@ -7,22 +7,61 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </header>
 <script>
-    function addQuantity(item_id) {
-        console.log(item_id);
-    //   $.ajax({
-    //     "url": "/cart/add/"+ item_id,
-    //     "type": "POST",
-    //     "success": success,
-    //     "error": failure
-    //   });
+    function addQuantity(item_id, item_price, quantity_available) {
+        $.ajax({
+            "url": "/cart/add/"+ item_id,
+            "type": "GET",
+            "data": "",
+            "success": success,
+            "error": failure
+        });
 
-    //   function success(item_id) {
-    //     console.log(item_id);
-    //   }
+        function success(data) {
+            let quantityLabel = document.getElementById(`quantity${item_id}`);
+            let priceLabel = document.getElementById(`price${item_id}`);
+            let totalLabel = document.getElementById('total');
 
-    //   function failure(xhr, status, exception) {
-    //     console.log(xhr, status, exception);
-    //   }
+            if (quantity_available == parseInt(quantityLabel.textContent)) {
+                //do nothing
+            }
+            else {
+                quantityLabel.textContent = parseInt(quantityLabel.textContent) + 1;
+                priceLabel.textContent = '$' + (parseFloat(priceLabel.textContent.substring(1, priceLabel.textContent.length)) + parseFloat(item_price));
+                totalLabel.textContent = 'Total $' + (parseFloat(totalLabel.textContent.substring(7, totalLabel.textContent.length)) + parseFloat(item_price));
+            }
+        }
+
+        function failure(xhr, status, exception) {
+            console.log(xhr, status, exception);
+        }
+    }
+
+    function removeQuantity(item_id, item_price) {
+        $.ajax({
+            "url": "/cart/remove/"+ item_id,
+            "type": "GET",
+            "data": "",
+            "success": success,
+            "error": failure
+        });
+
+        function success(data) {
+            let quantityLabel = document.getElementById(`quantity${item_id}`);
+            let priceLabel = document.getElementById(`price${item_id}`);
+            let totalLabel = document.getElementById('total');
+
+            quantityLabel.textContent = parseInt(quantityLabel.textContent) - 1;
+            priceLabel.textContent = '$' + (parseFloat(priceLabel.textContent.substring(1, priceLabel.textContent.length)) - parseFloat(item_price));
+            totalLabel.textContent = 'Total $' + (parseFloat(totalLabel.textContent.substring(7, totalLabel.textContent.length)) - parseFloat(item_price));
+
+            if(quantityLabel.textContent == "0"){
+                location.reload();
+            }
+        }
+
+        function failure(xhr, status, exception) {
+            console.log(xhr, status, exception);
+        }
     }
 </script>
 <body>
@@ -67,25 +106,28 @@
     <div class="mainContainer">
         <div class="itemsContainer">
             <% for(let item of items) { %>
-                <div class="itemContainer">
-                    <div class="itemDiv">
-                        <img class="itemImage" src="<%= item.img %>" />
-                        <div>
-                            <div class="nameDiv"><%= item.product_name %></div>
-                            <div class="quantityDiv" name="1">
-                                <button class="normalBtn" onclick="addQuantity('<%= item.item_id %>')" ><i class="fa fa-arrow-up"></i></button>
-                                <label class="quantityLabel"><%= item.quantity %></label>
-                                <button class="normalBtn" onclick="addQuantity('<%= item.item_id %>')"><i class="fa fa-arrow-down"></i></button>
+                <div class="itemParent">
+                    <div class="itemContainer">
+                        <div class="itemDiv">
+                            <img class="itemImage" src="<%= item.img %>" />
+                            <div>
+                                <div class="nameDiv"><%= item.product_name %></div>
+                                <div class="quantityDiv">
+                                    <button class="normalBtn" onclick="addQuantity('<%= item.item_id %>', '<%= item.price %>', '<%= item.quantity_available %>')"><i class="fa fa-arrow-up"></i></button>
+                                    <label class="quantityLabel" id="quantity<%= item.item_id %>"><%= item.quantity %></label>
+                                    <button class="normalBtn" onclick="removeQuantity('<%= item.item_id %>', '<%= item.price %>')"><i class="fa fa-arrow-down"></i></button>
+                                </div>
                             </div>
                         </div>
+                        <div class="priceDiv" id="price<%= item.item_id %>">$<%= parseFloat(item.price)*parseFloat(item.quantity) %></div>
                     </div>
-                    <div class="priceDiv">$<%= parseFloat(item.price)*parseFloat(item.quantity) %></div>
+                    <div class="trashDiv"><a href="/cart/delete/<%= item.item_id %>"><i class="fa fa-trash"></i></a></div>
                 </div>
             <% } %>
         </div>
 
         <div class="totalDiv">
-            <div>Total $200</div>
+            <div id="total">Total $<%= total %></div>
             <div class="centerBtn"><a class="checkoutButton" href="/checkout">Checkout</a></div>
         </div>
     </div>

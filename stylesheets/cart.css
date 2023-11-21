@@ -17,11 +17,23 @@
     padding: 20px;
 }
 
+.itemParent {
+    display: flex;
+    justify-content: space-between;
+}
+
 .itemContainer {
     display: flex;
     margin: 20px;
     border: 1px solid lightgray;
     justify-content: space-between;
+    width: 90%;
+}
+
+.trashDiv {
+    align-self: center;
+    height: 50px;
+    width: 40px;
 }
 
 .totalDiv {
