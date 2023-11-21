@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </header>
 <script>
-    function addQuantity(item_id, item_price) {
+    function addQuantity(item_id, item_price, quantity_available) {
         $.ajax({
             "url": "/cart/add/"+ item_id,
             "type": "GET",
@@ -21,9 +21,14 @@
             let priceLabel = document.getElementById(`price${item_id}`);
             let totalLabel = document.getElementById('total');
 
-            quantityLabel.textContent = parseInt(quantityLabel.textContent) + 1;
-            priceLabel.textContent = '$' + (parseFloat(priceLabel.textContent.substring(1, priceLabel.textContent.length)) + parseFloat(item_price));
-            totalLabel.textContent = 'Total $' + (parseFloat(totalLabel.textContent.substring(7, totalLabel.textContent.length)) + parseFloat(item_price));
+            if (quantity_available == parseInt(quantityLabel.textContent)) {
+                //do nothing
+            }
+            else {
+                quantityLabel.textContent = parseInt(quantityLabel.textContent) + 1;
+                priceLabel.textContent = '$' + (parseFloat(priceLabel.textContent.substring(1, priceLabel.textContent.length)) + parseFloat(item_price));
+                totalLabel.textContent = 'Total $' + (parseFloat(totalLabel.textContent.substring(7, totalLabel.textContent.length)) + parseFloat(item_price));
+            }
         }
 
         function failure(xhr, status, exception) {
@@ -48,6 +53,10 @@
             quantityLabel.textContent = parseInt(quantityLabel.textContent) - 1;
             priceLabel.textContent = '$' + (parseFloat(priceLabel.textContent.substring(1, priceLabel.textContent.length)) - parseFloat(item_price));
             totalLabel.textContent = 'Total $' + (parseFloat(totalLabel.textContent.substring(7, totalLabel.textContent.length)) - parseFloat(item_price));
+
+            if(quantityLabel.textContent == "0"){
+                location.reload();
+            }
         }
 
         function failure(xhr, status, exception) {
@@ -104,7 +113,7 @@
                             <div>
                                 <div class="nameDiv"><%= item.product_name %></div>
                                 <div class="quantityDiv">
-                                    <button class="normalBtn" onclick="addQuantity('<%= item.item_id %>', '<%= item.price %>')"><i class="fa fa-arrow-up"></i></button>
+                                    <button class="normalBtn" onclick="addQuantity('<%= item.item_id %>', '<%= item.price %>', '<%= item.quantity_available %>')"><i class="fa fa-arrow-up"></i></button>
                                     <label class="quantityLabel" id="quantity<%= item.item_id %>"><%= item.quantity %></label>
                                     <button class="normalBtn" onclick="removeQuantity('<%= item.item_id %>', '<%= item.price %>')"><i class="fa fa-arrow-down"></i></button>
                                 </div>
