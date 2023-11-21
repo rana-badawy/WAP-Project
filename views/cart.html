@@ -4,8 +4,27 @@
     <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
     <link rel="stylesheet" type="text/css" href="../stylesheets/cart.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </header>
+<script>
+    function addQuantity(item_id) {
+        console.log(item_id);
+    //   $.ajax({
+    //     "url": "/cart/add/"+ item_id,
+    //     "type": "POST",
+    //     "success": success,
+    //     "error": failure
+    //   });
 
+    //   function success(item_id) {
+    //     console.log(item_id);
+    //   }
+
+    //   function failure(xhr, status, exception) {
+    //     console.log(xhr, status, exception);
+    //   }
+    }
+</script>
 <body>
     <div class="nav-bar">
         <div class="nav-icon">
@@ -53,10 +72,10 @@
                         <img class="itemImage" src="<%= item.img %>" />
                         <div>
                             <div class="nameDiv"><%= item.product_name %></div>
-                            <div class="quantityDiv">
-                                <button class="normalBtn"><i class="fa fa-arrow-up"></i></button>
+                            <div class="quantityDiv" name="1">
+                                <button class="normalBtn" onclick="addQuantity('<%= item.item_id %>')" ><i class="fa fa-arrow-up"></i></button>
                                 <label class="quantityLabel"><%= item.quantity %></label>
-                                <button class="normalBtn"><i class="fa fa-arrow-down"></i></button>
+                                <button class="normalBtn" onclick="addQuantity('<%= item.item_id %>')"><i class="fa fa-arrow-down"></i></button>
                             </div>
                         </div>
                     </div>
@@ -119,7 +138,6 @@
             </div>
         </footer>
     </div>
-
 </body>
 
 </html>

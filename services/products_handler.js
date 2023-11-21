@@ -30,4 +30,8 @@ function getItem(req, res) {
     res.render('item', { result });
 }
 
-module.exports = { ajaxProducts, getItem };
+function getProducts(req, res, next) {
+    res.sendFile(path.join(__dirname, '../views', 'products.html'));
+}
+
+module.exports = { ajaxProducts, getItem, getProducts};

@@ -10,8 +10,4 @@ router.get('/register', handler.register);
 router.post('/addAccount', handler.addAccount);
 router.get('/logout', handler.logout);
 
-router.get('/products', handler.verify, function(req, res, next) {
-    res.sendFile(path.join(__dirname, '../views', 'products.html'));
-})
-
 module.exports = router;
