@@ -40,4 +40,26 @@ function checkout(req, res, next) {
     res.sendFile(path.join(__dirname, "../views", "order.html"));
 }
 
-module.exports = {cart, getCartMiddleware, checkout};
+function addQuantity(req, res, next) {
+    let item_id = req.params.id;
+    let item = cartItems.filter((i) => i.item_id == item_id)[0];
+
+    if (item.quantity_available > item.quantity) {
+        item.quantity++;
+
+        let query = "update item set quantity = quantity+1 where item_id = " + item_id;
+
+        connection.query(query,
+            function (err, result) {
+                if (err) {
+                    console.log('Error executing the query - ${err}');
+                }
+                else {
+                    console.log('item updated successfully');
+                }
+            }
+        );
+    }
+}
+
+module.exports = {cart, getCartMiddleware, checkout, addQuantity};
