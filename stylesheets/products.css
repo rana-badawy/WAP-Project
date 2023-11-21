@@ -6,7 +6,6 @@
 
 #left-bar {
     padding: 10px;
-    overflow-y: scroll;
 }
 #product {
     display: grid;
@@ -26,12 +25,28 @@
     padding: 10px 10px 0 0;
     gap: 20px;
 }
-button{
+.cart{
     width: 100%;
-    background-color: yellow;
-    border-color: yellow;
+    background-color: black;
+    border:1px solid black;
     height: 30px;
     font-size: 15px;
     border-radius: 5px;
     font-weight: 600;
+    color:#ffe512;
+}
+
+.cart:hover{
+    border: 1px solid #ffe512;
+    background-color: #ffe512;
+    color:black;
+}
+
+#size{
+    overflow-y: scroll;
+    padding: 20px;
+    margin-top: 10px;
+}
+#cnt{
+    padding: 10px 0 0 10px;
 }

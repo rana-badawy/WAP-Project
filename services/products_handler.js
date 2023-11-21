@@ -23,4 +23,11 @@ function ajaxProducts(req, res) {
     return res.send({ products })
 }
 
-module.exports = {ajaxProducts};
+function getItem(req, res) {
+    console.log(req.query);
+    let idx = req.query.id;
+    let result = products.find(({ id }) => id == idx);
+    res.render('item', { result });
+}
+
+module.exports = { ajaxProducts, getItem };
