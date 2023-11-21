@@ -18,6 +18,28 @@
 
         }
 
+        function add(self) {
+            $.ajax({
+                "url": "/ajaxAdd",
+                "type": "GET",
+                "data": { product_id: self.id},
+                "success": myAjaxSuccessFunction,
+                "error": ajaxFailure
+            });
+            function myAjaxSuccessFunction(data) {
+                // do something with the data
+                console.log(" HERE  ", data.response);
+                if(data.response == "Success."){
+                    alert ("Successfully added.");
+                }
+
+            }
+            function ajaxFailure(xhr, status, exception) {
+                $("button").html("Error");
+                console.log(xhr, status, exception);
+            }
+        }
+
     </script>
 </header>
 
@@ -71,7 +93,7 @@
         <div>
             <div class="desc">
                 <label><b>
-                        <%= result.name %>
+                        <%= result.product_name %>
                     </b></label>
                 <span style="color: palevioletred;"><b>$<%= result.price %></b></span>
             </div><br>
@@ -108,7 +130,7 @@
                 <div class="size" onclick="selectSize(this)">13 US</div>
                 <div class="size" onclick="selectSize(this)">14 US</div>
             </div><br><br>
-            <div><input type="submit" value="Add to Cart" class="cart" id="<%= result.id %>" /></div><br><br>
+            <div><input type="submit" value="Add to Cart" onclick='add(this)' class="cart" id="<%= result.id %>" /></div><br><br>
             <div><b>DELIVERY&RETURNS</b>
                 <details>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos autem illum dolore maxime
                     ad neque, consequuntur sunt praesentium quas fugiat nemo ex odit veritatis aliquid, exercitationem
