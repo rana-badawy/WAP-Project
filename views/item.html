@@ -2,85 +2,22 @@
 <html>
 <header>
     <link rel="stylesheet" type="text/css" href="../stylesheets/style.css" />
-    <link rel="stylesheet" type="text/css" href="../stylesheets/products.css" />
+    <link rel="stylesheet" type="text/css" href="../stylesheets/item.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
-        let products;
-        $(function () {
-            $.ajax({
-                "url": "/ajaxProducts",
-                "type": "GET",
-                "data": "",
-                "success": myAjaxSuccessFunction,
-                "error": ajaxFailure
-            });
-            function myAjaxSuccessFunction(data) {
-                // do something with the data
-                console.log(" HERE  ", data.products);
-                products = data.products;
-                setProduct(products);
-            }
-            function ajaxFailure(xhr, status, exception) {
-                $("button").html("Error");
-                console.log(xhr, status, exception);
-            }
-        });
-        function sort() {
-            let selectedVal = $('select[name="sort"] option:checked');
-            console.log(products);
-            if (selectedVal.val() == "price") {
-                products = products.sort(compareByPrice);
-                setProduct(products);
-                console.log("sorted", products);
-            }else{
-                products = products.sort(compareBySize);
-                setProduct(products);
-                console.log("sorted", products);
+        function selectSize(self) {
+            let ele = $(self);
+            if (self.style.color) {
+                ele.css('color', 'black');
+                ele.css('background-color', '');
+            } else {
+                ele.css('color', '#ffe512');
+                ele.css('background-color', 'black');
+
             }
 
         }
 
-        function add(self){
-            let selected = $(self);
-            let idx = self.id;
-            let result = products.find(({ id }) => id == idx );
-            console.log(result);
-        }
-
-        function compareByPrice(p1, p2) {
-            if (p1.price < p2.price) {
-                return -1;
-            } else if (p1.price > p2.price) {
-                return 1;
-            }
-            return 0;
-        }
-        function compareBySize(p1, p2) {
-            if (p1.size < p2.size) {
-                return -1;
-            } else if (p1.size > p2.size) {
-                return 1;
-            }
-            return 0;
-        }
-
-        function setProduct(products) {
-            let myProducts = $('#product');
-            let myitem = $('#cnt');
-            let html = "";
-            let html1 = "<label>" + products.length + " ITEMS | FILTER BY</label>";
-            for (let product of products) {
-                html += "<div id='item'>";
-                html += "<a href='item?id="+product.id+"'><img src=" + product.img + " width='100%;' height='250px;' style='object-fit: cover;'/></a><br>";
-                html += "<label>" + product.name + "</label><br>";
-                html += "<label>$" + product.price + "</label><br>";
-               // html += "<button>Add to Cart</button><br>";
-               html += "<input type='submit' value='Add to Cart' onclick='add(this)' id="+product.id+" class='cart'/>";
-                html += "</div>";
-            }
-            myProducts.html(html);
-            myitem.html(html1);
-        }
     </script>
 </header>
 
@@ -113,9 +50,9 @@
             </div>
             <div class="nav-bar-top-bottom">
                 <input type="search" class="search" name="search" placeholder="What can we help you find?" />
-                <label>|</label><a href="logout">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL06rMWl5HepL7A146Qcko9iTPwm22jk0DLQ&usqp=CAU"
-                    width="16px;" height="16px;" /></a>
+                <label>|</label>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL06rMWl5HepL7A146Qcko9iTPwm22jk0DLQ&usqp=CAU"
+                    width="16px;" height="16px;" />
                 <label>|</label><a href="cart">
                     <img src="data:image/png;base64,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"
                         width="16px;" height="16px;" /></a>
@@ -124,47 +61,64 @@
 
     </div>
     <div id="layout">
-        <div id="left-bar">
-            <div id="cnt"></div>
-            <div id="size">SIZE
-                <hr>
-                <div>WOMEN SIZE<br>
-                    <input type="checkbox" />5<br>
-                    <input type="checkbox" />6<br>
-                    <input type="checkbox" />7<br>
-                    <input type="checkbox" />8<br>
-                    <input type="checkbox" />9<br>
-                    <input type="checkbox" />10<br>
-                    <input type="checkbox" />11<br>
-                    <input type="checkbox" />12<br>
-                </div><br>
-                <div>MEN SIZE<br>
-                    <input type="checkbox" />6<br>
-                    <input type="checkbox" />7<br>
-                    <input type="checkbox" />8<br>
-                    <input type="checkbox" />9<br>
-                    <input type="checkbox" />10<br>
-                    <input type="checkbox" />11<br>
-                    <input type="checkbox" />12<br>
-                    <input type="checkbox" />13<br>
-                    <input type="checkbox" />14
-                </div>
-            </div>
+        <div class="product"><img src="<%= result.img %>" width='100%;' height='250px;' style="object-fit: cover;" />
+            <img src="<%= result.img %>" width='100%;' height='250px;' style="object-fit: cover;" />
+            <img src="<%= result.img %>" width='100%;' height='250px;' style="object-fit: cover;" />
+            <img src="<%= result.img %>" width='100%;' height='250px;' style="object-fit: cover;" />
+            <img src="<%= result.img %>" width='100%;' height='250px;' style="object-fit: cover;" />
+            <img src="<%= result.img %>" width='100%;' height='250px;' style="object-fit: cover;" />
         </div>
-        <div id="mid-bar">
-            <div id="view">
-                <div><b>VIEW:</b>PRODUCT</div>
-                <div>SORT BY:
-                    <select name="sort" onchange="sort()">
-                        <option value="recommended">RECOMMENDED</option>
-                        <option value="price">PRICE</option>
-                        <option value="size">SIZE</option>
-                    </select>
-                </div>
-            </div>
-            <div id="product">
-            </div>
-
+        <div>
+            <div class="desc">
+                <label><b>
+                        <%= result.name %>
+                    </b></label>
+                <span style="color: palevioletred;"><b>$<%= result.price %></b></span>
+            </div><br>
+            <div><label><b>Color</b>: Loreim</label></div><br>
+            <div class="colors">
+                <div class="color" style="background-color: black;"></div>
+                <div class="color" style="background-color: pink;"></div>
+                <div class="color" style="background-color: red;"></div>
+                <div class="color" style="background-color: yellow;"></div>
+                <div class="color" style="background-color: blue;"></div>
+                <div class="color" style="background-color: green;"></div>
+            </div><br>
+            <div class="guide"><b>US SIZE</b> <a href="">FIT AND SIZE GUIDE</a></div><br>
+            <div><b>WOMEN</b></div><br>
+            <div class="measurement">
+                <div class="size" onclick="selectSize(this)">5 US</div>
+                <div class="size" onclick="selectSize(this)">6 US</div>
+                <div class="size" onclick="selectSize(this)">7 US</div>
+                <div class="size" onclick="selectSize(this)">8 US</div>
+                <div class="size" onclick="selectSize(this)">9 US</div>
+                <div class="size" onclick="selectSize(this)">10 US</div>
+                <div class="size" onclick="selectSize(this)">11 US</div>
+                <div class="size" onclick="selectSize(this)">12 US</div>
+            </div><br>
+            <div><b>MEN</b></div><br>
+            <div class="measurement">
+                <div class="size" onclick="selectSize(this)">6 US</div>
+                <div class="size" onclick="selectSize(this)">7 US</div>
+                <div class="size" onclick="selectSize(this)">8 US</div>
+                <div class="size" onclick="selectSize(this)">9 US</div>
+                <div class="size" onclick="selectSize(this)">10 US</div>
+                <div class="size" onclick="selectSize(this)">11 US</div>
+                <div class="size" onclick="selectSize(this)">12 US</div>
+                <div class="size" onclick="selectSize(this)">13 US</div>
+                <div class="size" onclick="selectSize(this)">14 US</div>
+            </div><br><br>
+            <div><input type="submit" value="Add to Cart" class="cart" id="<%= result.id %>" /></div><br><br>
+            <div><b>DELIVERY&RETURNS</b>
+                <details>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos autem illum dolore maxime
+                    ad neque, consequuntur sunt praesentium quas fugiat nemo ex odit veritatis aliquid, exercitationem
+                    sed, laborum facere non!</details>
+            </div><br><br>
+            <div><b>DETAILS</b>
+                <details>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos autem illum dolore maxime
+                    ad neque, consequuntur sunt praesentium quas fugiat nemo ex odit veritatis aliquid, exercitationem
+                    sed, laborum facere non!</details>
+            </div><br><br><br>
         </div>
     </div>
     <div>
