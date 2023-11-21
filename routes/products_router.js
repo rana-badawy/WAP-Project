@@ -8,5 +8,6 @@ const router = express.Router();
 router.get('/products', user_handler.verify, handler.getProducts);
 router.get('/ajaxProducts', handler.ajaxProducts);
 router.get('/item', handler.getItem);
+router.get('/ajaxAdd', handler.ajaxAdd);
 
 module.exports = router;
