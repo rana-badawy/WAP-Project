@@ -108,16 +108,19 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
-INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Jeans',50,20,'https://lsco.scene7.com/is/image/lsco/726930130-alt1-pdp-lse?fmt=jpeg&qlt=70&resMode=bisharp&fit=crop,0&op_usm=1.25,0.6,8&wid=2000&hei=1800');
-INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Sleeve Sweater',34.5,20,'https://m.media-amazon.com/images/I/814o4yH+VgL._AC_UY1000_.jpg');
-INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Turtlenecks',24.5,20,'https://images.urbndata.com/is/image/Anthropologie/4113086690011_052_b?$a15-pdp-detail-shot$&fit=constrain&qlt=80&wid=640');
-INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Boots',70.5,2,'https://cdn.media.amplience.net/i/drmartens/11822006.80?$smart576$&fmt=auto');
+INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Jeans', 50, 20, 'https://lsco.scene7.com/is/image/lsco/726930130-alt1-pdp-lse?fmt=jpeg&qlt=70&resMode=bisharp&fit=crop,0&op_usm=1.25,0.6,8&wid=2000&hei=1800');
+INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Sleeve Sweater', 34.5, 20, 'https://m.media-amazon.com/images/I/814o4yH+VgL._AC_UY1000_.jpg');
+INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Turtlenecks', 24.5, 20, 'https://images.urbndata.com/is/image/Anthropologie/4113086690011_052_b?$a15-pdp-detail-shot$&fit=constrain&qlt=80&wid=640');
+INSERT INTO product (product_name, price, quantity_available, img) VALUES ('Boots', 70.5, 2, 'https://cdn.media.amplience.net/i/drmartens/11822006.80?$smart576$&fmt=auto');
 
 
 INSERT INTO users (fname, lname, email, user_password) VALUES ('admin', 'admin', 'admin@gmail.com', 'admin123');
 INSERT INTO users (fname, lname, email, user_password) VALUES ('r', 'r', 'r@gmail.com', 'rr');
 INSERT INTO users (fname, lname, email, user_password) VALUES ('d', 'd', 'd@gmail.com', 'dd');
 
+INSERT INTO cart (user_id) VALUES (1);
+INSERT INTO cart (user_id) VALUES (2);
+INSERT INTO cart (user_id) VALUES (3);
 
 INSERT INTO item (cart_id, product_id, quantity) VALUES (1, 2, 1);
 INSERT INTO item (cart_id, product_id, quantity) VALUES (1, 3, 1);
@@ -125,7 +128,4 @@ INSERT INTO item (cart_id, product_id, quantity) VALUES (1, 4, 1);
 INSERT INTO item (cart_id, product_id, quantity) VALUES (2, 2, 1);
 
 
-INSERT INTO cart (user_id) VALUES (1);
-INSERT INTO cart (user_id) VALUES (2);
-INSERT INTO cart (user_id) VALUES (3);
 
